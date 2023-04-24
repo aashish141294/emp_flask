@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<br>
+<br>
+{% if all_user|length == 0%}
+
+
+<div class="alert alert-dark" role="alert">
+   No records found.
+</div>
+{% else %}
+<table border="1" width="50%">
+
+        <div id="timeout" align="center" >  
+            {% if message %}
+                <p style="color:red;font-size: x-large;">{{ form.message }}</p>
+            {% endif %}
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-sm table-bordered table-hover table-responsive-sm">
+                        <thead class="thead-dark">
+                        <th scope="row">S.No</th>
+                        <th scope="row" style="width: 120px">FIRST NAME</th>
+                        <th scope="row">LOGIN</th>
+                        <th scope="row">EDIT</th>
+                        </thead>
+                        {% for user in all_user %}
+                        <tbody>
+                            <td>{{loop.index}}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a type='button' href="/delete/{{user.id}}" >Delete
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a type='button' href="/update/{{user.id}}" >Edit
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+{% endif %}
+{% endblock %}
